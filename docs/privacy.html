@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>像素G PixG｜隱私權政策</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f5f7fb}
+    *{box-sizing:border-box}body{margin:0}.wrap{max-width:860px;margin:0 auto;padding:56px 24px 72px}.card{background:#fff;border:1px solid #dfe5ee;border-radius:18px;padding:34px;box-shadow:0 16px 44px rgba(15,23,42,.07)}
+    h1{margin:0;font-size:30px;letter-spacing:-.03em}.en{color:#2563eb;font-size:17px;margin-left:6px}.updated{color:#7b8495;font-size:13px;margin:8px 0 28px}h2{font-size:17px;margin:28px 0 8px}p,li{line-height:1.75;color:#536077}ul{padding-left:22px}a{color:#1d4ed8}.nav{display:flex;gap:14px;margin-top:30px;padding-top:20px;border-top:1px solid #e8ebf0;font-size:13px}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <article class="card">
+      <h1>像素G <span class="en">PixG</span> 隱私權政策</h1>
+      <div class="updated">最後更新：2026-09-02</div>
+      <p>PixG（像素G）是一個在瀏覽器本機運作的 Chrome 擴充功能，用於協助 Web ChatGPT 圖片生成的尺寸提示，以及圖片裁切、縮放、格式轉換與下載。</p>
+      <h2>資料處理</h2>
+      <p>PixG 不經營自有後端服務，也不會把圖片、提示詞或轉換後檔案傳送到 PixG 的伺服器。</p>
+      <p>擴充功能會在使用者操作時讀取目前 ChatGPT 頁面中的必要 DOM 資訊，以便：</p>
+      <ul>
+        <li>找到 ChatGPT 輸入框並填入使用者要求的尺寸輔助文字。</li>
+        <li>偵測新生成的圖片。</li>
+        <li>取得使用者明確選擇進行精準輸出的圖片來源。</li>
+      </ul>
+      <h2>本機儲存</h2>
+      <p>PixG 會使用 <code>chrome.storage.local</code> 在使用者裝置本機保存或暫存：</p>
+      <ul>
+        <li>PixG 浮動按鈕位置。</li>
+        <li>等待開啟編輯器的單次圖片來源 URL。</li>
+        <li>該次工作流的目標寬度與高度。</li>
+      </ul>
+      <p>這些資料不會由 PixG 開發者遠端收集。</p>
+      <h2>圖片處理</h2>
+      <p>裁切、縮放、Canvas 繪製、PNG / JPEG / WebP 編碼與尺寸驗證均在使用者瀏覽器本機完成。</p>
+      <p>若 ChatGPT 圖片來源允許，PixG 可能從 ChatGPT / OpenAI 的圖片來源網址讀取圖片；若來源受到登入、簽名 URL 或其他存取控制限制，PixG 不會繞過限制，使用者可改用貼上、拖曳或本機選檔。</p>
+      <h2>第三方服務</h2>
+      <p>使用 Web ChatGPT 時，使用者與 OpenAI 之間的資料處理受 OpenAI 自身條款與隱私政策約束。PixG 不代表 OpenAI，亦非 OpenAI 官方產品。</p>
+      <h2>資料出售、廣告與追蹤</h2>
+      <p>PixG 不出售使用者資料、不使用使用者資料投放廣告，也不加入第三方分析或追蹤 SDK。</p>
+      <h2>聯絡方式</h2>
+      <p>如有隱私權或產品問題，可透過 PixG 公開 GitHub 儲存庫的 Issues 聯絡維護者：<a href="https://github.com/index7777/PixGauge/issues" target="_blank" rel="noopener">github.com/index7777/PixGauge/issues</a>。</p>
+      <div class="nav">
+        <a href="index.html">產品資訊</a>
+        <a href="https://github.com/index7777/PixGauge" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
