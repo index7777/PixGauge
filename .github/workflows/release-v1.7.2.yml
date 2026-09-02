@@ -17,18 +17,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Rebuild release archives
+      - name: Rebuild release packages
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p dist
-          cat release-data/v1.7.2/store.b64.part-* | base64 -d > dist/PixG-v1.7.2-store.zip
-          cat release-data/v1.7.2/source.b64.part-* | base64 -d > dist/PixG-v1.7.2-source.zip
-          cp release-data/v1.7.2/PixG-v1.7.2-store.zip.sha256 dist/
-          cp release-data/v1.7.2/PixG-v1.7.2-source.zip.sha256 dist/
+          mkdir -p dist source-work/PixG-v1.7.2
+          cat release-data/v1.7.2/store3.b64.part-* | base64 -d > dist/PixG-v1.7.2-store.zip
+
+          echo "c546846f72d526a8adb5a173346d12d41cd0ad924e353525969e9f5e8a5f1189  dist/PixG-v1.7.2-store.zip" | sha256sum -c -
+
+          unzip -q dist/PixG-v1.7.2-store.zip -d source-work/PixG-v1.7.2
+          cp README.md source-work/PixG-v1.7.2/README.md
+          [ -f PRIVACY.md ] && cp PRIVACY.md source-work/PixG-v1.7.2/PRIVACY.md || true
+          [ -f STORE-LISTING.md ] && cp STORE-LISTING.md source-work/PixG-v1.7.2/STORE-LISTING.md || true
+          [ -f release-data/v1.7.2/RELEASE_NOTES.md ] && cp release-data/v1.7.2/RELEASE_NOTES.md source-work/PixG-v1.7.2/RELEASE_NOTES.md || true
+          (cd source-work && zip -qr ../dist/PixG-v1.7.2-source.zip PixG-v1.7.2)
+
           cd dist
-          sha256sum -c PixG-v1.7.2-store.zip.sha256
-          sha256sum -c PixG-v1.7.2-source.zip.sha256
+          sha256sum PixG-v1.7.2-store.zip > PixG-v1.7.2-store.zip.sha256
+          sha256sum PixG-v1.7.2-source.zip > PixG-v1.7.2-source.zip.sha256
 
       - name: Create GitHub Release
         env:
@@ -37,7 +44,12 @@ jobs:
         run: |
           set -euo pipefail
           if gh release view v1.7.2 >/dev/null 2>&1; then
-            gh release upload v1.7.2 dist/PixG-v1.7.2-store.zip dist/PixG-v1.7.2-source.zip dist/PixG-v1.7.2-store.zip.sha256 dist/PixG-v1.7.2-source.zip.sha256 --clobber
+            gh release upload v1.7.2 \
+              dist/PixG-v1.7.2-store.zip \
+              dist/PixG-v1.7.2-source.zip \
+              dist/PixG-v1.7.2-store.zip.sha256 \
+              dist/PixG-v1.7.2-source.zip.sha256 \
+              --clobber
           else
             gh release create v1.7.2 \
               dist/PixG-v1.7.2-store.zip \
