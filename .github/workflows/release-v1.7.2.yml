@@ -1,0 +1,50 @@
+name: Publish PixG v1.7.2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'release-data/v1.7.2/READY'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rebuild release archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cat release-data/v1.7.2/store.b64.part-* | base64 -d > dist/PixG-v1.7.2-store.zip
+          cat release-data/v1.7.2/source.b64.part-* | base64 -d > dist/PixG-v1.7.2-source.zip
+          cp release-data/v1.7.2/PixG-v1.7.2-store.zip.sha256 dist/
+          cp release-data/v1.7.2/PixG-v1.7.2-source.zip.sha256 dist/
+          cd dist
+          sha256sum -c PixG-v1.7.2-store.zip.sha256
+          sha256sum -c PixG-v1.7.2-source.zip.sha256
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v1.7.2 >/dev/null 2>&1; then
+            gh release upload v1.7.2 dist/PixG-v1.7.2-store.zip dist/PixG-v1.7.2-source.zip dist/PixG-v1.7.2-store.zip.sha256 dist/PixG-v1.7.2-source.zip.sha256 --clobber
+          else
+            gh release create v1.7.2 \
+              dist/PixG-v1.7.2-store.zip \
+              dist/PixG-v1.7.2-source.zip \
+              dist/PixG-v1.7.2-store.zip.sha256 \
+              dist/PixG-v1.7.2-source.zip.sha256 \
+              --target "${GITHUB_SHA}" \
+              --title "PixG v1.7.2" \
+              --notes-file release-data/v1.7.2/RELEASE_NOTES.md
+          fi
