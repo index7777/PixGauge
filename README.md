@@ -8,13 +8,13 @@ PixG 協助 Web ChatGPT 依你指定的尺寸比例生成圖片，並在瀏覽�
 
 一般使用者請下載：
 
-**`PixG-v1.7.2-store.zip`**
+**`PixG-v1.7.3-store.zip`**
 
 > 請不要把 GitHub 頁面上方的 **Code → Download ZIP** 當成安裝包；那是整個儲存庫的原始碼。
 
 ## Chrome 手動安裝
 
-1. 從 Releases 下載 `PixG-v1.7.2-store.zip`
+1. 從 Releases 下載 `PixG-v1.7.3-store.zip`
 2. 將 ZIP 解壓縮
 3. Chrome 開啟 `chrome://extensions/`
 4. 開啟右上角「開發人員模式」
@@ -31,7 +31,6 @@ PixG 協助 Web ChatGPT 依你指定的尺寸比例生成圖片，並在瀏覽�
 | 檔案 | 用途 |
 |---|---|
 | `PixG-v1.7.2-store.zip` | 一般使用者手動安裝 |
-| `PixG-v1.7.2-source.zip` | 開發者查看程式碼與發布文件 |
 | `*.sha256` | 驗證下載檔案完整性 |
 
 ## 功能
