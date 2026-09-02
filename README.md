@@ -11,7 +11,7 @@ PixG 是一個 Chrome Manifest V3 擴充功能，協助 Web ChatGPT 依目標比
 - 支援 / Issues：https://github.com/index7777/PixGauge/issues
 - 隱私權政策原始文件：https://github.com/index7777/PixGauge/blob/main/PRIVACY.md
 
-Chrome Web Store 的 Privacy Policy URL 預定使用：
+Chrome Web Store 的 Privacy Policy URL ：
 
 `https://index7777.github.io/PixGauge/privacy.html`
 
